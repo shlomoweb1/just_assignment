@@ -1,7 +1,7 @@
 import Clients, { Iclient } from "../../../models/clients";
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import {Document, Types} from 'mongoose'
+import {Document, Types, FilterQuery} from 'mongoose'
 
 export interface IgetResponse{
     success: boolean;
@@ -31,7 +31,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             try {
                 const page = parseInt(req.query.page as string || "1") - 1;
                 const limit = parseInt(req.query.limit as string || "20");
-                const query = { "_deleted.date": { $exists: false } };
+                let query : FilterQuery<Iclient> = { "_deleted.date": { $exists: false } };
+                if(typeof req.query.q != "undefined")
+                    query["$or"] = [
+                        {first_name: {$regex: req.query.q, $options: 'i'}},
+                        {last_name: {$regex: req.query.q,  $options: 'i'}},
+                    ]
+
 
                 return Clients.count(query, (err, totalClients) => {
                     if (err) return res.status(500).json({ success: false, message: "Error in DB" });

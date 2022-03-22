@@ -14,11 +14,12 @@ function Modal({ show, onClose, children, title } : {show: boolean; onClose: ()=
         const classes = (e.target as HTMLElement).classList;
         for(let i = 0, l=classes.length; i<l;i++)
             if(/.*modal-wrapper.*/.test(classes[i])) return false;
+        
         onClose();
     };
 
     const modalContent = show ? (
-        <div className={style["modal-overlay"]} onClick={handleCloseClick}>
+        <div className={style["modal-overlay"]}>
             <div className={style["modal-wrapper"]}>
                 <div className={style["modal-header"]}>
                     <a href="#" onClick={handleCloseClick}>x</a>
