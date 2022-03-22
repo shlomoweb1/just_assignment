@@ -1,0 +1,84 @@
+table.transaction {
+    border-collapse: collapse;
+    margin: 25px auto;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 450px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+    thead {
+        tr {
+            background-color: #009879;
+            color: #ffffff;
+            text-align: left;
+
+            th,
+            td {
+                padding: 12px 15px;
+            }
+        }
+    }
+
+    tbody {
+        tr {
+            border-bottom: 1px solid #dddddd;
+
+            &:nth-of-type(even) {
+                background-color: #f3f3f3;
+            }
+
+            &:last-of-type {
+                border-bottom: 2px solid #009879;
+            }
+
+            &:hover {
+                background-color: #68eed4;
+            }
+
+            td {
+                font-size: 0.8rem;
+                padding: 0.8em 1.5em;
+
+                &[data-name="tools"] {
+                    * {
+                        margin: 0 0.3em
+                    }
+
+                    button {
+                        background-color: #fff;
+                        border: 1px solid #d5d9d9;
+                        border-radius: 8px;
+                        box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+                        box-sizing: border-box;
+                        color: #0f1111;
+                        cursor: pointer;
+                        display: inline-block;
+                        font-family: "Amazon Ember", sans-serif;
+                        font-size: 13px;
+                        line-height: 29px;
+                        padding: 0 10px 0 11px;
+                        position: relative;
+                        text-align: center;
+                        text-decoration: none;
+                        user-select: none;
+                        -webkit-user-select: none;
+                        touch-action: manipulation;
+                        vertical-align: middle;
+                        width: 100px;
+
+
+                        &:hover {
+                            background-color: #f7fafa;
+                        }
+
+                        &:focus {
+                            border-color: #008296;
+                            box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+                            outline: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

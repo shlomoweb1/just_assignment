@@ -1,0 +1,40 @@
+version: "3.3"
+
+services:
+  nextjs:
+    ports:
+      - 3000:3000
+    build:
+      context: nextJs
+      dockerfile: Dockerfile
+    volumes:
+      - ./nextJs/src:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/.next
+      - ./assignment/data.json:/usr/assignment/data.json
+    container_name: justt_nextJs
+    links:
+      - db-mongo
+    depends_on:
+      - db-mongo
+    environment:
+      - mongoUri=mongodb://db-mongo:27017/retail
+      - NEXT_PUBLIC_BACKEND_URL=http://localhost:3000
+    networks:
+      - justt-network    
+  db-mongo:
+    image: mongo:4.4-bionic
+    container_name: justt_mongoDb
+    ports:
+      - ${PORT_MONGO:-27017}:27017
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - justt-network
+
+networks:
+  justt-network:
+    driver: bridge
+volumes:
+  mongo-data:
+    driver: local
